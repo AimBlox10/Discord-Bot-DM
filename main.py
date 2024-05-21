@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import os
+from keep_alive import keep_alive  # Import the keep_alive function
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -30,4 +31,8 @@ async def dm(ctx, username: discord.User, *, message: str):
     except discord.errors.HTTPException as e:
         await ctx.reply(f"Failed to send message: {e}")
 
+# Keep the bot alive with Flask
+keep_alive()
+
+# Run the bot with the token from environment variable
 bot.run(os.getenv("DISCORD_BOT_TOKEN"))
