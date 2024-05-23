@@ -61,7 +61,7 @@ async def history(ctx):
 # Function to send direct messages
 @bot.command()
 async def dm(ctx, username: discord.User, *, message: str):
-    SPECIFIED_CHANNEL_ID = 1242492829352198234 # Replace this with your specified channel ID
+    SPECIFIED_CHANNEL_ID = 1243299332804055280 # Replace this with your specified channel ID
     if ctx.channel.id != SPECIFIED_CHANNEL_ID:
         await ctx.reply("This command can only be used in the specified channel.")
         return
