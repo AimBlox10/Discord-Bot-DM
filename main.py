@@ -31,7 +31,7 @@ async def on_ready():
 async def kick(ctx, member: discord.Member, *, reason='No reason provided'):
     await member.send(f'You have been kicked from {ctx.guild.name} for the following reason: {reason}')
     await member.kick(reason=reason)
-    await ctx.send(f'{member.mention} has been kicked for {reason}')
+    await ctx.reply(f'{member.mention} has been kicked for reason : {reason}')
     # Save kick history to file
     with open('history.txt', 'a') as file:
         file.write(f'KICK: {member.id} - {member.name} - {reason}\n')
@@ -42,7 +42,7 @@ async def kick(ctx, member: discord.Member, *, reason='No reason provided'):
 async def ban(ctx, member: discord.Member, *, reason='No reason provided'):
     await member.send(f'You have been banned from {ctx.guild.name} for the following reason: {reason}')
     await member.ban(reason=reason)
-    await ctx.send(f'{member.mention} has been banned for {reason}')
+    await ctx.send(f'{member.mention} has been banned for reason : {reason}')
     # Save ban history to file
     with open('history.txt', 'a') as file:
         file.write(f'BAN: {member.id} - {member.name} - {reason}\n')
@@ -54,16 +54,16 @@ async def history(ctx):
     try:
         with open('history.txt', 'r') as file:
             history = file.read()
-            await ctx.send('**Kick and Ban History:**\n```' + history + '```')
+            await ctx.reply('**Kick and Ban History:**\n```' + history + '```')
     except FileNotFoundError:
-        await ctx.send("No history found.")
+        await ctx.reply("No history found.")
 
 # Function to send direct messages
 @bot.command()
 async def dm(ctx, username: discord.User, *, message: str):
     SPECIFIED_CHANNEL_ID = 1242492829352198234 # Replace this with your specified channel ID
     if ctx.channel.id != SPECIFIED_CHANNEL_ID:
-        await ctx.send("This command can only be used in the specified channel.")
+        await ctx.reply("This command can only be used in the specified channel.")
         return
 
     try:
